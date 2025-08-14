@@ -1,0 +1,42 @@
+{
+  "name": "M365 Agent Toolkit Test Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-json",
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [
+    3000,
+    3001,
+    3002,
+    3978,
+    56150
+  ],
+  "portsAttributes": {
+    "3978": {
+      "label": "ATK Auth Server",
+      "visibility": "public",
+      "protocol": "https"
+    },
+    "56150": {
+      "label": "M365 Agent UI",
+      "visibility": "public",
+      "protocol": "https"
+    }
+  },
+  "postCreateCommand": "npm install -g @microsoft/m365agentstoolkit-cli && mkdir -p /workspaces/m365-test/agents /workspaces/m365-test/logs",
+  "remoteUser": "node"
+}
